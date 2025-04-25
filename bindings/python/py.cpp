@@ -426,6 +426,11 @@ PYBIND11_MODULE(pydynorrt, m) {
       .def_readwrite("lower", &FrameBounds::lower)
       .def_readwrite("upper", &FrameBounds::upper);
 
+  // try to fix incompatible function arguments
+  py::class_<pinocchio::SE3>(m, "SE3")
+    // 
+    ;
+
   py::class_<Pin_ik_solver>(m, "Pin_ik_solver")
       .def(py::init<>())
       .def("set_urdf_filename", &Pin_ik_solver::set_urdf_filename)
@@ -438,6 +443,15 @@ PYBIND11_MODULE(pydynorrt, m) {
       .def("set_bounds", &Pin_ik_solver::set_bounds)
       .def("set_frame_positions", &Pin_ik_solver::set_frame_positions)
       .def("set_frame_poses", &Pin_ik_solver::set_frame_poses)
+      .def("set_frame_poses_np", &Pin_ik_solver::set_frame_poses_np)
+    //   .def("set_frame_poses", [](Pin_ik_solver &self, const py::list &py_list) {
+    //     std::vector<pinocchio::SE3> t_pq_des;
+    //     for (auto item : py_list) {
+    //         t_pq_des.push_back(item.cast<pinocchio::SE3>());
+    //     }
+    //     self.set_frame_poses(t_pq_des);
+    //     })
+    
       .def("set_max_num_attempts", &Pin_ik_solver::set_max_num_attempts)
       .def("set_max_solutions", &Pin_ik_solver::set_max_solutions)
       .def("set_max_time_ms", &Pin_ik_solver::set_max_time_ms)
@@ -456,7 +470,10 @@ PYBIND11_MODULE(pydynorrt, m) {
       .def("set_use_gradient_descent", &Pin_ik_solver::set_use_gradient_descent)
       .def("set_use_finite_diff", &Pin_ik_solver::set_use_finite_diff)
       .def("set_joint_reg_penalty", &Pin_ik_solver::set_joint_reg_penalty)
-      .def("set_joint_reg", &Pin_ik_solver::set_joint_reg);
+      .def("set_joint_reg", &Pin_ik_solver::set_joint_reg)
+      .def_property("flag_compute_distance_cost", 
+                    &Pin_ik_solver::get_compute_distance_cost,
+                    &Pin_ik_solver::set_compute_distance_cost);
 
   // void set_joint_reg_penalty(double t_joint_reg_penalty) {
   //   joint_reg_penalty = t_joint_reg_penalty;

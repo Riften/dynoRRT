@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iostream>
 
-#include "magic_enum.hpp"
+#include "magic_enum/magic_enum.hpp"
 #include <Eigen/Core>
 #include <Eigen/Dense>
 #include <boost/fusion/functional/invocation/invoke.hpp>

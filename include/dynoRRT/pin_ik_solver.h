@@ -76,10 +76,35 @@ public:
     frame_positions = t_p_des;
   }
 
+//   void set_frame_rotations(const std::vector<Eigen::Matrix3d> &t_R_des) {
+//     frame_positions.clear();
+//     frame_positions.reserve(t_R_des.size());
+//     for (const auto &R : t_R_des) {
+//       frame_positions.emplace_back(pinocchio::log3(R));
+//     }
+//     frame_poses
+//   }
+
   void set_frame_poses(const std::vector<pinocchio::SE3> &t_pq_des) {
     frame_poses = t_pq_des;
     flag_desired_pq = true;
   }
+
+  void set_frame_poses_np(const std::vector<Eigen::Matrix3d> &t_R_des,
+                          const std::vector<Eigen::Vector3d> &t_p_des) {
+    frame_poses.clear();
+    frame_poses.reserve(t_R_des.size());
+    for (size_t i = 0; i < t_R_des.size(); i++) {
+      frame_poses.emplace_back(pinocchio::SE3(t_R_des[i], t_p_des[i]));
+    }
+    flag_desired_pq = true;
+  }
+
+  void set_compute_distance_cost(bool t_compute_distance_cost) {
+    flag_compute_distance_cost = t_compute_distance_cost;
+  }
+
+  bool get_compute_distance_cost() { return flag_compute_distance_cost; }
 
   void set_max_num_attempts(int num) { max_num_attempts = num; }
 
@@ -152,6 +177,7 @@ private:
   std::vector<pinocchio::SE3> frame_poses;
   std::vector<Eigen::VectorXd> frame_positions;
   bool flag_desired_pq = false;
+  bool flag_compute_distance_cost = true;
 
   // int frame_id = -1;
 

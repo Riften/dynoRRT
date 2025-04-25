@@ -41,11 +41,18 @@ You can build the Python package using `setup.py` or using `cmake`.
 With Cmake
 
 ```bash
+# 安装原本的 pydynorrt
+pip install pydynorrt
 mkdir build
 cd build
-cmake -DBUILD_EXAMPLES=ON -DBUILD_DYNOBENCH=ON -DBUILD_PYRRT=ON -DBUILD_BENCHMARK=OFF -DCMAKE_PREFIX_PATH="/opt/openrobots/"   -DBUILD_TESTS_RRT=1 ..
+#cmake -DBUILD_EXAMPLES=ON -DBUILD_DYNOBENCH=ON -DBUILD_PYRRT=ON -DBUILD_BENCHMARK=OFF -DCMAKE_PREFIX_PATH="/opt/openrobots/"   -DBUILD_TESTS_RRT=1 ..
+cmake -DBUILD_EXAMPLES=ON -DBUILD_DYNOBENCH=ON -DBUILD_PYRRT=ON -DBUILD_BENCHMARK=OFF -DCMAKE_PREFIX_PATH="$CONDA_PREFIX" -DBUILD_TESTS_RRT=1 .
 make
-make install
+# make install
+# 将编译的结果复制到 conda 的 site-packages 替换原本版本。
+cd bindings/python
+cp pydynorrt*.so $CONDA_PREFIX/lib/python3.9/site-packages/pydynorrt
+# 如果名字和 $CONDA_PREFIX/lib/python3.9/site-packages/pydynorrt 下面原有的 .so 文件不一样，可能需要把原来的删掉
 ```
 
 

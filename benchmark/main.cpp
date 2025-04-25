@@ -7,7 +7,7 @@
 #define BOOST_TEST_DYN_LINK
 
 #include "dynotree/KDTree.h"
-#include "magic_enum.hpp"
+#include "magic_enum/magic_enum.hpp"
 #include <Eigen/Dense>
 #include <chrono>
 #include <fstream>
@@ -30,7 +30,7 @@
 #include <iostream>
 
 #include "dynotree/KDTree.h"
-#include "magic_enum.hpp"
+#include "magic_enum/magic_enum.hpp"
 #include <Eigen/Dense>
 #include <chrono>
 #include <fstream>

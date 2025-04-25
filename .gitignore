@@ -1,0 +1,13 @@
+/build
+/build-vscode
+/dist
+.cache
+.idea
+*.egg-info
+__pycache__
+*.pyc
+.vscode
+.ipynb_checkpoints
+.mypy_cache
+/stubs
+outputs

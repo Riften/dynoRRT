@@ -15,7 +15,7 @@
 
 #include "dynoRRT/dynorrt_macros.h"
 #include "dynotree/KDTree.h"
-#include "magic_enum.hpp"
+#include "magic_enum/magic_enum.hpp"
 #include <Eigen/Dense>
 #include <fstream>
 #include <iomanip>
@@ -32,7 +32,7 @@
 #include <iostream>
 
 #include "dynotree/KDTree.h"
-#include "magic_enum.hpp"
+#include "magic_enum/magic_enum.hpp"
 #include <Eigen/Dense>
 #include <fstream>
 #include <iomanip>

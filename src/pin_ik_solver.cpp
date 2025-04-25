@@ -1,7 +1,7 @@
 
 
 #include "dynoRRT/pin_ik_solver.h"
-#include "magic_enum.hpp"
+#include "magic_enum/magic_enum.hpp"
 #include "pinocchio/algorithm/frames.hpp"
 
 #include "pinocchio/algorithm/geometry.hpp"
@@ -330,7 +330,9 @@ void Pin_ik_solver::set_pin_model(pinocchio::Model &t_model,
 double Pin_ik_solver::get_distance_cost(const Eigen::VectorXd &q,
                                         Eigen::VectorXd *grad,
                                         Eigen::MatrixXd *H) {
-
+  if (!flag_compute_distance_cost) {
+    return 0;
+  }
   double cost_dist = 0;
   // Collisions
   //
